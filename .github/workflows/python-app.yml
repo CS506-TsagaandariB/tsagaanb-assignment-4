@@ -1,4 +1,4 @@
-name: Python Application
+name: Python application
 
 on:
   push:
@@ -13,21 +13,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Check out the repository
+    # Checkout the repository code
+    - name: Checkout code
       uses: actions/checkout@v2
 
+    # Set up Python environment
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.x'  
-        
+        python-version: '3.x'
+
+    # Install dependencies by running `make install`
     - name: Install dependencies
       run: make install
 
-    - name: Run the application
+    # Run the Flask application with a sleep to give it time to start
+    - name: Run Flask application
       run: |
         make run &
-        sleep 10  # Allow the server time to start up
+        sleep 3
 
-    - name: Test server status
-      run: curl -f http://localhost:3000 || exit 1
+    # Run tests (if any), or verify that the server is up
+    # You can add your own logic here to verify your app is running correctly
+    - name: Verify Flask application is running
+      run: |
+        curl http://localhost:3000 || exit 1
