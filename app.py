@@ -20,18 +20,12 @@ from sklearn.decomposition import TruncatedSVD
 # Fetch dataset
 newsgroups = fetch_20newsgroups(subset='all')
 documents = newsgroups.data
-print(f"Loaded {len(documents)} documents")  # Debugging line
-
 
 # Initialize TF-IDF Vectorizer and SVD
-print("Initializing vectorizer and SVD...")
-
 vectorizer = TfidfVectorizer(stop_words='english')
 tfidf_matrix = vectorizer.fit_transform(documents)
 svd = TruncatedSVD(n_components=100)
 reduced_matrix = svd.fit_transform(tfidf_matrix)
-print("Initialization complete")
-
 
 def search_engine(query):
     """
