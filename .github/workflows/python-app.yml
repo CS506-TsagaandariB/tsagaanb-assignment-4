@@ -27,7 +27,7 @@ jobs:
     - name: Run Flask application
       run: |
         make run &
-        sleep 10  
+        sleep 20  
 
     - name: Verify Flask application is running
       run: curl http://localhost:3000 || exit 1
